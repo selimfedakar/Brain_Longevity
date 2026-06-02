@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment secrets
+.env
+**/.env
+!**/.env.example
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# iOS
+apps/mobile/ios/Pods/
+apps/mobile/ios/build/
+apps/mobile/ios/DerivedData/
+apps/mobile/ios/.xcode.env.local
+
+# Expo
+apps/mobile/.expo/
+apps/mobile/.expo-shared/
+
+# Android
+apps/mobile/android/build/
+apps/mobile/android/.gradle/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# Misc
+.cache/
+coverage/
+*.tgz
+
+# Internal analysis docs
+DÜZELTMELER_VE_YAPILACAKLAR.md
