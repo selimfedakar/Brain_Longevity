@@ -1,0 +1,61 @@
+{
+  "expo": {
+    "name": "BrainLongevity",
+    "newArchEnabled": false,
+    "slug": "brainlongevity",
+    "scheme": "brainlongevity",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.selimfedakar.brainlongevity"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#1A1A2E"
+        }
+      ],
+      [
+        "react-native-health",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
+      ]
+    ],
+    "infoPlist": {
+      "NSHealthShareUsageDescription": "BrainLongevity uyku, adım ve HRV verilerinizi kullanarak Beyin Sağlığı Endeksi'ni hesaplar.",
+      "NSHealthUpdateUsageDescription": "BrainLongevity egzersiz ve aktif dakika verilerini Apple Health'e kaydeder.",
+      "NSMicrophoneUsageDescription": "BrainLongevity, zihinsel akıcılık skorunu hesaplamak için sesli günlük kaydı yapar. Ses verisi işlendikten sonra cihazda veya sunucuda saklanmaz.",
+      "NSAppTransportSecurity": {
+        "NSExceptionDomains": {
+          "localhost": {
+            "NSExceptionAllowsInsecureHTTPLoads": true,
+            "NSIncludesSubdomains": false
+          }
+        }
+      }
+    },
+    "entitlements": {
+      "com.apple.developer.healthkit": true,
+      "com.apple.developer.healthkit.background-delivery": true
+    }
+  }
+}
