@@ -15,6 +15,7 @@ const UpdateProfileSchema = z.object({
 
 const OnboardingSchema = z.object({
   age: z.number().int().min(1).max(120),
+  birthDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
   sex: z.enum(['male', 'female', 'other']),
   cardiovascularRisk: z.number().int().min(1).max(5),
   hasHearingLoss: z.boolean(),
@@ -151,12 +152,13 @@ export async function userRoutes(fastify: FastifyInstance) {
 
     await query(
       `INSERT INTO user_profiles
-         (user_id, age, sex, cardiovascular_risk, has_hearing_loss,
+         (user_id, age, birth_date, sex, cardiovascular_risk, has_hearing_loss,
           has_diabetes, has_hypertension, social_isolation_score,
           education_years, baseline_cognitive_score, disclaimer_accepted_at)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW())
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NOW())
        ON CONFLICT (user_id) DO UPDATE SET
          age = EXCLUDED.age,
+         birth_date = EXCLUDED.birth_date,
          sex = EXCLUDED.sex,
          cardiovascular_risk = EXCLUDED.cardiovascular_risk,
          has_hearing_loss = EXCLUDED.has_hearing_loss,
@@ -168,7 +170,7 @@ export async function userRoutes(fastify: FastifyInstance) {
          disclaimer_accepted_at = NOW(),
          updated_at = NOW()`,
       [
-        userId, d.age, d.sex, d.cardiovascularRisk, d.hasHearingLoss,
+        userId, d.age, d.birthDate ?? null, d.sex, d.cardiovascularRisk, d.hasHearingLoss,
         d.hasDiabetes, d.hasHypertension, d.socialIsolationScore,
         d.educationYears, d.baselineCognitiveScore ?? null,
       ]
